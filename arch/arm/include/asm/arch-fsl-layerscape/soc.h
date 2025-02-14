@@ -72,6 +72,7 @@ enum boot_src {
 	BOOT_SOURCE_SD_MMC,
 	BOOT_SOURCE_SD_MMC2,
 	BOOT_SOURCE_I2C1_EXTENDED,
+	BOOT_SOURCE_SEMIHOSTING,
 };
 
 enum boot_src get_boot_src(void);

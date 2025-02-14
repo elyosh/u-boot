@@ -854,6 +854,11 @@ __weak int fsl_setenv_bootcmd(void)
 		sprintf(bootcmd_str, SD2_BOOTCOMMAND);
 		break;
 #endif
+#ifdef SEMIHOSTING_BOOTCOMMAND
+		case BOOT_SOURCE_SEMIHOSTING:
+			sprintf(bootcmd_str, SEMIHOSTING_BOOTCOMMAND);
+		break;
+#endif
 	default:
 #ifdef QSPI_NOR_BOOTCOMMAND
 		sprintf(bootcmd_str, QSPI_NOR_BOOTCOMMAND);
@@ -904,6 +909,11 @@ int fsl_setenv_mcinitcmd(void)
 #ifdef SD2_MC_INIT_CMD
 	case BOOT_SOURCE_SD_MMC2:
 	ret = env_set("mcinitcmd", SD2_MC_INIT_CMD);
+		break;
+#endif
+#ifdef SEMIHOSTING_MC_INIT_CMD
+	case BOOT_SOURCE_SEMIHOSTING:
+	ret = env_set("mcinitcmd", SEMIHOSTING_MC_INIT_CMD);
 		break;
 #endif
 	default:

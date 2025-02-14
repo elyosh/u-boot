@@ -134,7 +134,10 @@
 #define RCW_SRC_ADDR_OFFSET_8MB		0x800000
 
 /* RCW SRC HARDCODED */
-#define RCW_SRC_HARDCODED_VAL		0x0	/* 0x00 - 0x07 */
+#define RCW_SRC_HARDCODED_1_VAL		0x0	/* 0x00 */
+#define RCW_SRC_HARDCODED_2_VAL		0x1	/* 0x01 */
+#define RCW_SRC_HARDCODED_3_VAL		0x2	/* 0x02 */
+#define RCW_SRC_HARDCODED_4_VAL		0x3	/* 0x03 */
 
 #define RCW_SRC_SDHC1_VAL		0x8	/* 0x8 */
 #define RCW_SRC_SDHC2_VAL		0x9	/* 0x9 */

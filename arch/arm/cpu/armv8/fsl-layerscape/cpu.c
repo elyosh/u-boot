@@ -691,6 +691,12 @@ enum boot_src __get_boot_src(u32 porsr1)
 	case RCW_SRC_FLEXSPI_NOR_24B:
 		src = BOOT_SOURCE_XSPI_NOR;
 	break;
+	case RCW_SRC_HARDCODED_1_VAL:
+	case RCW_SRC_HARDCODED_2_VAL:
+	case RCW_SRC_HARDCODED_3_VAL:
+	case RCW_SRC_HARDCODED_4_VAL:
+		src = BOOT_SOURCE_SEMIHOSTING;
+	break;
 	default:
 		src = BOOT_SOURCE_RESERVED;
 	}
