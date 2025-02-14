@@ -1,0 +1,15 @@
+if TARGET_ORION
+
+config SYS_BOARD
+	default "orion"
+
+config SYS_VENDOR
+	default "orion"
+
+config SYS_SOC
+	default "fsl-layerscape"
+
+config SYS_CONFIG_NAME
+	default "orion"
+
+endif

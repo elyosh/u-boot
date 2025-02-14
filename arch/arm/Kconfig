@@ -1534,6 +1534,16 @@ config TARGET_LX2162AQDS
 	  Support for NXP LX2162AQDS platform.
 	  The lx2162aqds support is based on LX2160A Layerscape Architecture processor.
 
+config TARGET_ORION
+    bool "Support Orion LX2162A"
+    select ARCH_LX2162A
+    select ARM64
+    select ARMV8_MULTIENTRY
+    select ARCH_SUPPORT_TFABOOT
+    select BOARD_LATE_INIT
+    help
+      Support for Orion platform.
+
 config TARGET_HIKEY
 	bool "Support HiKey 96boards Consumer Edition Platform"
 	select ARM64
@@ -2432,6 +2442,7 @@ source "board/phytium/durian/Kconfig"
 source "board/phytium/pomelo/Kconfig"
 source "board/phytium/pe2201/Kconfig"
 source "board/xen/xenguest_arm64/Kconfig"
+source "board/orion/orion/Kconfig"
 
 source "arch/arm/Kconfig.debug"
 
