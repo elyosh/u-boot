@@ -451,6 +451,7 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
 	if (!lmb_should_notify(flags))
 		return 0;
 
+#if CONFIG_IS_ENABLED(EFI_LOADER)
 	efi_addr = (uintptr_t)map_sysmem(addr, 0);
 	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
 	efi_addr &= ~EFI_PAGE_MASK;
@@ -466,7 +467,7 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
 		return -1;
 	}
 	unmap_sysmem((void *)(uintptr_t)efi_addr);
-
+#endif
 	return 0;
 }
 
