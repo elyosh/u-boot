@@ -19,53 +19,6 @@ DECLARE_GLOBAL_DATA_PTR;
 
 int board_eth_init(struct bd_info *bis)
 {
-#if defined(CONFIG_FSL_MC_ENET)
-	struct memac_mdio_info mdio_info;
-	struct memac_mdio_controller *reg;
-	int i, interface;
-	struct mii_dev *dev;
-	struct ccsr_gur *gur = (void *)(CFG_SYS_FSL_GUTS_ADDR);
-	u32 srds_s1;
-
-	srds_s1 = in_le32(&gur->rcwsr[28]) &
-				FSL_CHASSIS3_RCWSR28_SRDS1_PRTCL_MASK;
-	srds_s1 >>= FSL_CHASSIS3_RCWSR28_SRDS1_PRTCL_SHIFT;
-
-	reg = (struct memac_mdio_controller *)CFG_SYS_FSL_WRIOP1_MDIO1;
-	mdio_info.regs = reg;
-	mdio_info.name = DEFAULT_WRIOP_MDIO1_NAME;
-
-	/* Register the EMI 1 */
-	fm_memac_mdio_init(bis, &mdio_info);
-
-	switch (srds_s1) {
-	case 8:
-		wriop_set_phy_address(WRIOP1_DPMAC17, 0, RGMII_PHY_ADDR1);
-		break;
-
-	default:
-		printf("SerDes1 protocol 0x%x is not supported on LX2160ACEX7\n",
-		       srds_s1);
-		goto next;
-	}
-
-	for (i = WRIOP1_DPMAC17; i <= WRIOP1_DPMAC17; i++) {
-		interface = wriop_get_enet_if(i);
-		switch (interface) {
-		case PHY_INTERFACE_MODE_RGMII:
-		case PHY_INTERFACE_MODE_RGMII_ID:
-			dev = miiphy_get_dev_by_name(DEFAULT_WRIOP_MDIO1_NAME);
-			wriop_set_mdio(i, dev);
-			break;
-		default:
-			break;
-		}
-	}
-
-next:
-	cpu_eth_init(bis);
-#endif /* CONFIG_FSL_MC_ENET */
-
 	return pci_eth_init(bis);
 }
 
